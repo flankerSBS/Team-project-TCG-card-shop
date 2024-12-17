@@ -1,7 +1,7 @@
-//Each card has a card name and its price, combat power, stats, and edge color. The price of the same card varies from
-// side to side. The above can be displayed when the card name and card side type are entered. The card edge color is
+//Each card has a card name and its price, combat power, stats, and border color. The price of the same card varies from
+// side to side. The above can be displayed when the card name and card side type are entered. The card border color is
 // divided into: black,grey,silver,gold four kinds, respectively corresponding to the card 1,2,3,4 four levels.
-// Combat effectiveness determines the basic value of the card price, and the higher the combat effectiveness of the
+// Combat power determines the basic value of the card price, and the higher the combat power of the
 // same level, the more expensive the price. The base value of the card price is 0.43 times the combat power.
 // Cards with a higher level are up to five times more expensive, and depending on the actual situation,
 // the price of the card will vary, and the price will be about 20 percent higher in February-June than in November,
@@ -10,10 +10,10 @@
 
 //FUNCTION:
 //1. inquire card information
-//Create a card information database, enter the card name and card side type through the keyboard to query
+//Create a card information database, enter the card name and card border type through the keyboard to query
 // the corresponding card data in the card database.
 //2. Draw cards
-//draw a bag of cards ,which contains eight random cards among the 30 cards in the card database and the card level is
+//draw a pack of cards ,which contains eight random cards among the 30 cards in the card database and the card level is
 // random, when you click the card pack, the information of each of the eight cards will be displayed,
 // including name, attribute, price and card side information.
 // Level 1 has a 76% probability of occurrence, Level 2 has a 20% probability, Level 3 has a 3.9% probability,
