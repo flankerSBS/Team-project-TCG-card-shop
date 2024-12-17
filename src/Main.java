@@ -18,8 +18,10 @@
 // including name, attribute, price and card side information.
 // Level 1 has a 76% probability of occurrence, Level 2 has a 20% probability, Level 3 has a 3.9% probability,
 // and Level 4 has a 0.1% probability. Calculate the total price of the eight cards at the end.
+//Display all card name at first.
+//————by Tao Ji
 
-
+//It's my part—————Tao JI
 import java.util.*;
 
 
@@ -88,7 +90,7 @@ class Card {
         return this.attackPower * 0.43;
     }
 
-    // 根据卡边的乘算系数计算最终价格
+    // Calculate the final price based on the card border's multiplication factor
     private double calculateFinalPrice() {
         double multiplier = borderColor.getMultiplier();
         return this.basePrice * multiplier;
@@ -98,9 +100,9 @@ class Card {
     public double adjustPriceForSeason(int month) {
         double seasonalMultiplier = 1.0;
         if (month >= 2 && month <= 6) {
-            seasonalMultiplier = 1.2;  // 2月到6月价格提高20%
+            seasonalMultiplier = 1.2;  // Prices will increase by 20% from February to June
         } else if (month >= 7 && month <= 10) {
-            seasonalMultiplier = 1.1;  // 7月到10月价格提高10%
+            seasonalMultiplier = 1.1;  // Prices will increase by 10% from July to October
         }
         return this.finalPrice * seasonalMultiplier;
     }
@@ -117,7 +119,7 @@ class Card {
                 name, attribute, attackPower, basePrice, basePrice);
     }
 
-    // 根据卡边颜色进行乘算后的价格
+    // The price is multiplied according to the color of the card brder
     public String getPriceAfterBorderColor(CardBorder border) {
         double adjustedPrice = basePrice * border.getMultiplier();
         return String.format("Card{name='%s', attribute='%s', attackPower=%d, borderColor='%s', level=%d, basePrice=%.2f, finalPrice=%.2f}",
@@ -132,13 +134,13 @@ class Card {
 class CardDatabase {
     private List<Card> cards;
 
-    // 初始化卡牌数据库
+    // Initializes the card database
     public CardDatabase() {
         cards = new ArrayList<>();
         loadCards();
     }
 
-    // 录入卡牌信息
+    //Enter the card information  
     private void loadCards() {
         cards.add(new Card("Bulbasaur", "wood", 20, CardBorder.getBorderByColor("black")));
         cards.add(new Card("Ivysaur", "wood", 42, CardBorder.getBorderByColor("black")));
@@ -172,17 +174,17 @@ class CardDatabase {
         cards.add(new Card("Ninetales", "water", 76, CardBorder.getBorderByColor("black")));
     }
 
-    // 查询卡牌信息，根据卡牌名称
+    // Inquire card information, according to card name
     public Card searchCard(String name) {
         for (Card card : cards) {
             if (card.name.equalsIgnoreCase(name)) {
                 return card;
             }
         }
-        return null;  // 没有找到符合条件的卡牌
+        return null;  // No eligible cards were found
     }
 
-    // 获取所有卡牌的名称
+    // Get the names of all cards
     public List<String> getAllCardNames() {
         List<String> cardNames = new ArrayList<>();
         for (Card card : cards) {
@@ -191,7 +193,7 @@ class CardDatabase {
         return cardNames;
     }
 
-    // 随机生成卡包（8张卡）
+    // Randomly generated card pack (8 cards)
     public List<Card> generatePack() {
         Random rand = new Random();
         List<Card> pack = new ArrayList<>();
@@ -199,15 +201,16 @@ class CardDatabase {
         for (int i = 0; i < 8; i++) {
             String randomBorderColor = getRandomBorderColor(rand);
             Card card = cards.get(rand.nextInt(cards.size()));
-            // 在卡包中随机分配卡边颜色
+            //Assign the card border color randomly in the card pack
             pack.add(new Card(card.name, card.attribute, card.attackPower, CardBorder.getBorderByColor(randomBorderColor)));
         }
         return pack;
     }
 
-    // 根据概率选择卡边颜色
+    // Select the card border color according to probability
+    //This is my part.————Wenchao Dai
     private String getRandomBorderColor(Random rand) {
-        int randomValue = rand.nextInt(10000);  // 获取一个0到9999之间的随机数
+        int randomValue = rand.nextInt(10000);  // Get a random number between 0 and 9999
 
         if (randomValue < 7600) {
             return "black";  // 76% for black
@@ -220,7 +223,7 @@ class CardDatabase {
         }
     }
 
-    // 打印卡牌数据库中的所有卡
+    // Print all cards in the card database
     public void printAllCards() {
         for (Card card : cards) {
             System.out.println(card);
@@ -233,70 +236,71 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
         CardDatabase cardDatabase = new CardDatabase();
 
-        // 显示所有卡牌名称
-        System.out.println("卡牌数据库中的所有卡牌名称：");
+        // Displays all card names
+        //This is also my part.————Wenchao Dai
+        System.out.println("All card names in the card database:");
         List<String> cardNames = cardDatabase.getAllCardNames();
         for (String cardName : cardNames) {
             System.out.println(cardName);
         }
 
-        // 询问用户当前月份
-        System.out.println("请输入当前月份（1-12）：");
+        // Ask the user for the current month
+        System.out.println("Please enter the current month (1-12) :");
         int currentMonth = scanner.nextInt();
-        scanner.nextLine();  // 吸收换行符
+        scanner.nextLine();  
 
         while (true) {
-            // 提供用户选择功能
+            // Provide user selection function
             System.out.println("请选择功能：");
-            System.out.println("1. 查询卡牌信息");
-            System.out.println("2. 随机抽卡包（8张卡）");
-            System.out.println("3. 退出");
+            System.out.println("1. Inquire card information");
+            System.out.println("2. Random card pack (8 cards)");
+            System.out.println("3.Quit");
 
             int choice = scanner.nextInt();
-            scanner.nextLine();  // 吸收换行符
+            scanner.nextLine();  
 
             if (choice == 1) {
-                // 查询卡牌信息
-                System.out.println("请输入卡牌名称查询：");
+                // Inquire card information
+                System.out.println("Please enter the card name to inquire:");
                 String cardName = scanner.nextLine();
 
-                // 查询卡牌
+                // Inquire for cards
                 Card card = cardDatabase.searchCard(cardName);
                 if (card != null) {
-                    // 显示无卡边颜色（基础数值）
-                    System.out.println("基础数值（黑色卡边）：" + card.getBaseData());
+                    // Display base value
+                    System.out.println("Base value (black card border) :" + card.getBaseData());
 
-                    // 输入卡边颜色并查询
-                    System.out.println("请输入卡边颜色（black, grey, silver, gold）：");
+                    // Enter the card border color and query
+                    System.out.println("Please enter the card edge color（black, grey, silver, gold）：");
                     String borderColor = scanner.nextLine();
                     CardBorder border = CardBorder.getBorderByColor(borderColor);
 
                     if (border != null) {
-                        System.out.println("查询到的卡牌数据：");
-                        // 显示卡牌根据卡边颜色乘算后的结果
+                        System.out.println("The card data is queried：");
+                        // Show the result of multiplying the card according to the color of the card border
                         System.out.println(card.getPriceAfterBorderColor(border));
                     } else {
-                        System.out.println("无效的卡边颜色！");
+                        System.out.println("Invalid card edge color!");
                     }
                 } else {
-                    System.out.println("未找到该卡牌！");
+                    System.out.println("This card is not found!");
                 }
             } else if (choice == 2) {
-                // 随机抽卡包
-                System.out.println("生成一个随机卡包（包含8张卡）：");
+                // Random card pack
+                System.out.println("Generate a random card pack (containing 8 cards) :");
                 List<Card> pack = cardDatabase.generatePack();
                 double totalPrice = 0;
                 for (Card card : pack) {
                     System.out.println(card);
                     totalPrice += card.getFinalPrice();
                 }
-                System.out.println("八张卡牌的总价格为: ￥" + totalPrice);
+                System.out.println("The total price of the eight cards is : $" + totalPrice);
             } else if (choice == 3) {
-                // 退出程序
-                System.out.println("退出程序");
+                // quit
+                System.out.println("Quit");
                 break;
             } else {
-                System.out.println("无效选择，请重新输入！");
+                System.out.println("Invalid selection, please re-enter!");
             }
         }
 
