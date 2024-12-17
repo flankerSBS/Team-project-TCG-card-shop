@@ -251,7 +251,7 @@ public class Main {
 
         while (true) {
             // Provide user selection function
-            System.out.println("请选择功能：");
+            System.out.println("Please select the function：");
             System.out.println("1. Inquire card information");
             System.out.println("2. Random card pack (8 cards)");
             System.out.println("3.Quit");
